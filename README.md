@@ -18,8 +18,3 @@ If there are exactly two command line arguments and an image is provided as the 
 Running **python face-detect-haar.py dominic.jpg**:
 
 ![Image of Dominic with Face Detection Using Haar Cascades](anh.png)
-
-Running **python face-detect-dnn.py dominic.jpg**:
-
-<!-- ![Image of Dominic with Face Detection Using DNN](https://user-images.githubusercontent.com/74373754/116709904-bc8e5380-aa03-11eb-83c9-32d9ea33fed5.png) -->
-
