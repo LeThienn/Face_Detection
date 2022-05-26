@@ -17,33 +17,9 @@ If there are exactly two command line arguments and an image is provided as the 
 ## Examples
 Running **python face-detect-haar.py dominic.jpg**:
 
-![Image of Dominic with Face Detection Using Haar Cascades](https://github.com/basista21/faceDetection/blob/main/dominic_out.jpg)
+![Image of Dominic with Face Detection Using Haar Cascades](anh.png)
 
 Running **python face-detect-dnn.py dominic.jpg**:
 
-![Image of Dominic with Face Detection Using DNN](https://user-images.githubusercontent.com/74373754/116709904-bc8e5380-aa03-11eb-83c9-32d9ea33fed5.png)
-
-*The DNN detector successfully detected the third face, but with only 30.02% confidence.*
-
-### Comparison
-
-Haar cascades vs DNN:
-
-![image](https://user-images.githubusercontent.com/74373754/116710833-c6648680-aa04-11eb-95c3-dbaa46b570f9.png)
-
-*A false positive and a false negative for the haar face detector. DNN successfully detected the face.*
-
-<br><br>
-
-![image](https://user-images.githubusercontent.com/74373754/116711745-bd27e980-aa05-11eb-9b4d-5ff31fe8bdeb.png)
-
-*A true positive and a false positive for each.*
-
-
-
-
-
-
-
-
+<!-- ![Image of Dominic with Face Detection Using DNN](https://user-images.githubusercontent.com/74373754/116709904-bc8e5380-aa03-11eb-83c9-32d9ea33fed5.png) -->
 
