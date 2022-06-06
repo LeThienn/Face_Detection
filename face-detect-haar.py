@@ -86,7 +86,7 @@ def useImage():
     # Convert image to grayscale
     grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = detectFace(grayscale, image, False)
-    cv2.imshow("anh.png", image)
+    cv2.imshow("2.jpg", image)
     cv2.waitKey(0)
 
 
@@ -97,7 +97,6 @@ def main():
         useImage()
     else:
         exit()
-
 
 if __name__ == "__main__":
     main()

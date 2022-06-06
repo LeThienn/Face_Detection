@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 import cv2
 
@@ -11,7 +12,8 @@ green = (120, 217, 30)
 # Độ dày của hình chữ nhật được vẽ xung quanh các mặt
 thickness = 2
 
-def drawRectangle(image, color, faces):
+
+def drawRectangle(image, color, faces, eyes):
     for (x, y, w, h) in faces:
         barLength = int(h / 8)
         barWidth = w
@@ -19,6 +21,8 @@ def drawRectangle(image, color, faces):
         cv2.rectangle(image, (x, y-barLength),
                       (x+barWidth, y), color, thickness)
         cv2.rectangle(image, (x, y), (x+w, y+h), color, thickness)
+        for (ex, ey, ew, eh) in eyes:
+            cv2.rectangle(image, (ex, ey), (ex+ew, ey+eh), green, thickness)
     return image
 
 
@@ -30,44 +34,39 @@ def detectFace(grayscale, image, isWebcam):
         minNeighbors=5,
         minSize=(30, 30),
     )
-    if not(isWebcam):
-        # Phát hiện khuôn mặt hồ sơ trong hình ảnh bằng cách sử dụng phân tầng khuôn mặt
-        profileFaces = eye_cascade.detectMultiScale(
-            grayscale,
-            scaleFactor=1.05,
-            minNeighbors=5,
-            minSize=(30, 30),
-        )
-        # Phát hiện khuôn mặt hồ sơ trong hình ảnh được lật để phát hiện khuôn mặt hồ sơ hướng sang phải
-        flipped = cv2.flip(grayscale, 1)
-        profileFacesFlipped = eye_cascade.detectMultiScale(
-            flipped,
-            scaleFactor=1.05,
-            minNeighbors=5,
-            minSize=(30, 30)
-        )
+    eyes = eye_cascade.detectMultiScale(
+        grayscale,
+        scaleFactor=1.05,
+        minNeighbors=5,
+        minSize=(30, 30),
+    )
+    # Vẽ một hình chữ nhật xung quanh mặt chính diện được phát hiện
+    image = drawRectangle(image, blue, faces, eyes)
+    return image
 
 
-# cap = cv2.VideoCapture(0)
+def useWebcam():
+    video = cv2.VideoCapture(0)
+    while True:
+        _, frame = video.read()
+        # Convert frame to grayscale
+        grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = detectFace(grayscale, frame, True)
+        # Flip the frame
+        frame = cv2.flip(frame, 1)
+        cv2.imshow("Face Detection", frame)
+        if cv2.waitKey(1) > 0:
+            break
+    video.release()
+    cv2.destroyAllWindows()
 
-# while 1:
-#     ret, img = cap.read()
-#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-#     for (x, y, w, h) in faces:
-#         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-#         roi_gray = gray[y:y+h, x:x+w]
-#         roi_color = img[y:y+h, x:x+w]
+def main():
+    if len(sys.argv) == 1:
+        useWebcam()
+    else:
+        exit()
 
-#         eyes = eye_cascade.detectMultiScale(roi_gray)
-#         for (ex, ey, ew, eh) in eyes:
-#             cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
 
-#     cv2.imshow('img', img)
-#     ch = cv2.waitKey(1)
-#     if ch & 0xFF == ord('q'):
-#         break
-
-# cap.release()
-# cv2.destroyAllWindows()
+if __name__ == "__main__":
+    main()
