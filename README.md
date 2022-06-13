@@ -13,4 +13,4 @@ If there are exactly two command line arguments and an image is provided as the 
 ## Examples
 Running **python face-detect-haar.py**:
 
-![Image of Dominic with Face Detection Using Haar Cascades](anh.png)
+![Image of Dominic with Face Detection Using Haar Cascades](/image/anh.png)
