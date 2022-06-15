@@ -60,13 +60,22 @@ def useWebcam():
     video.release()
     cv2.destroyAllWindows()
 
+def useImage():
+    # Read the image
+    image = cv2.imread(sys.argv[1])
+    # Convert image to grayscale
+    grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image = detectFace(grayscale, image, False)
+    cv2.imshow("2.jpg", image)
+    cv2.waitKey(0)
 
 def main():
     if len(sys.argv) == 1:
         useWebcam()
+    elif len(sys.argv) == 2:
+        useImage()
     else:
         exit()
-
 
 if __name__ == "__main__":
     main()
