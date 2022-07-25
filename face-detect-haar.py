@@ -58,9 +58,9 @@ def detectFace(grayscale, image, isWebcam):
     if not (isWebcam):
         # Vẽ một hình chữ nhật xung quanh mỗi mặt được phát hiện
         
-        image = drawRectangle(imageDraw, green, profileFaces)
+        image = drawRectangle(imageDraw, blue, profileFaces)
         image = cv2.flip(imageDraw, 1)
-        image = drawRectangle(imageDraw, green, profileFacesFlipped)
+        image = drawRectangle(imageDraw, blue, profileFacesFlipped)
         image = cv2.flip(image, 1)
         
     return image
